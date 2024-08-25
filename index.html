@@ -118,7 +118,7 @@
         function loadChat() {
             const user = paramsObj.user;
             const to = paramsObj.to;
-            fetch(WEB_APP_URL + `?user=${user}to=${to}`).then(res => {
+            fetch(WEB_APP_URL + `?user=${user}&to=${to}`).then(res => {
                 alert(res.json());
                 const data = JSON.parse(res.json());
                 let htmlStr = "";
