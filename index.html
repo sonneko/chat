@@ -176,6 +176,8 @@
             window.setInterval(loadChat, 50000);
         }
         function submit() {
+            const user = paramsObj.user;
+            const to = paramsObj.to;
             const formData = {
                 content: [
                     Date.now(),
