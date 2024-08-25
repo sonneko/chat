@@ -124,14 +124,12 @@
                 data.forEach((item) => {
                     htmlStr += `<div class="messa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
                 })
-                alert("yaya" + htmlStr);
                 chatEle.innerHTML = htmlStr;
             })
         }
         if (ver === "chat") {
             window.setInterval(loadChat, 70000);
         }
-        loadChat();
     </script>
 </body>
 
