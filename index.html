@@ -1,1 +1,32 @@
-g
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャット用サイト</title>
+</head>
+<body>
+    <div id="indexPage">
+        <h1>ちゃっとようのさいと</h1>
+        <p class="attention">知識ある人なら他の人のちゃっと内容が見れるっちゃ見れるのでご注意ください。</p>
+        <a href="intro.html">このサイトについて→</a>
+        <p>↓ユーサーIDを入力して、チャット開始！！</p>
+        <input type="text" id="userid">
+    </div>
+    <div id="contentPage">
+        <h1>ちゃっとようのさいと</h1>
+        <p>ちゃっとぺーじです</p>
+        <div class="chat">
+            
+        </div>
+        
+    </div>
+    <script>
+        //現在のURLを取得
+        const nowUrl = window.location.href;
+        // paramsを取得
+        const params = nowUrl.split("/")[3].split("?");
+        alert(params);
+    </script>
+</body>
+</html>
