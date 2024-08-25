@@ -124,6 +124,7 @@
                     return;
                 }
                 const data = res.content;
+                alert(JSON.stringify(data));
                 let htmlStr = "";
                 data.forEach((item) => {
                     htmlStr += `<div class="messa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
