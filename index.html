@@ -47,6 +47,7 @@
         <p>↓相手のユーザーIDを入力！</p>
         <input type="text" id="toId">
         <div class="btn" onclick="btnClicked()">ちゃっとを開始！！</div>
+        <div id="formAttention"></div>
     </div>
     <div id="contentPage">
         <h1 class="title">ちゃっとようのさいと</h1>
@@ -64,6 +65,7 @@
         const contentPageEle = document.getElementById("contentPage");
         const userIdEle = document.getElementById("userId");
         const toIdEle = document.getElementById("toId");
+        const formAttentionEle = document.getElementById("formAttention");
         //現在のURLを取得
         const nowUrl = window.location.href;
         // ver を保持する変数
@@ -92,9 +94,18 @@
         if (ver === "chat") {
             
         } else if (ver === "index") {
-
+            
         } else {
             alert("error");
+        }
+        function btnClicked() {
+            user = userIdEle.value;
+            to = toIdEle.value;
+            if (user == "" || to == "") {
+                formAttentionEle.innerText = "なんか書いてないよー";
+                return;
+            }
+            
         }
     </script>
 </body>
