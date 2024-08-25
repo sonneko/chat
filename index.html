@@ -11,7 +11,7 @@
         <p class="attention">知識ある人なら他の人のちゃっと内容が見れるっちゃ見れるのでご注意ください。</p>
         <a href="intro.html">このサイトについて→</a>
         <p>↓ユーサーIDを入力して、チャット開始！！</p>
-        <input type="text" id="userid">
+        <input type="text" id="userId">
     </div>
     <div id="contentPage">
         <h1>ちゃっとようのさいと</h1>
@@ -22,6 +22,10 @@
         
     </div>
     <script>
+        // 要素を取得
+        const indexPageEle = document.getElementById("indexPage");
+        const contentPageEle = document.getElementById("contentPage");
+        const userIdEle = document.getElementById("userId");
         //現在のURLを取得
         const nowUrl = window.location.href;
         // paramsを取得
@@ -31,7 +35,19 @@
             const splitStr = item.split("=");
             paramsObj[splitStr[0]] = splitStr[1];
         })
-        alert(JSON.stringify(paramsObj));
+        const render = (ver) => {
+            if (ver === "chat") {
+                indexPageEle.style.display = "none";
+                contentPageEle.style.display = "initial";
+            }
+            if (ver === "index") {
+                indexPageEle.style.display = "initial";
+                contentPageEle.style.display = "none";
+            }
+        }
+        if (paramsObj.user === undefined) render("index");
+        else if (paramsObj.to === undefined) render("index");
+        else render("index");
     </script>
 </body>
 </html>
