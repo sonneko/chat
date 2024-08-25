@@ -25,8 +25,13 @@
         //現在のURLを取得
         const nowUrl = window.location.href;
         // paramsを取得
-        const params = nowUrl.split("/")[4].split("?")[1];
-        alert(params);
+        const params = nowUrl.split("?")[1].split("&");
+        let paramsObj = {}
+        params.forEach((item, index) => {
+            const splitStr = item.split("=");
+            paramsObj[splitStr[0]] = splitStr[1];
+        })
+        alert(JSON.stringify(paramsObj));
     </script>
 </body>
 </html>
