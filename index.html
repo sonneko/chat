@@ -69,6 +69,7 @@
         </div>
     </div>
     <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqrKcM7nyESKmHp5Hodf99BwyihCogPugbQg8P09xBCAJnMM6c7kcCRhL5Fo3TfOrQ_A/exec"
         // 要素を取得
         const indexPageEle = document.getElementById("indexPage");
         const contentPageEle = document.getElementById("contentPage");
@@ -110,7 +111,9 @@
             window.location = `?user=${user}&to=${to}`;
         }
         if (ver === "chat") {
-            
+            let contentData;
+            fetch(WEB_APP_URL + `?user=${user}to=${to}`).then(res => contentData = JSON.parse(res));
+            alert(JSON.stringify(contentData));
         }
     </script>
 </body>
