@@ -44,8 +44,8 @@
         }
 
         .chat {
-            width: 90vw;
             height: 90vh;
+            padding: 100px;
             box-shadow: inset 2px 2px 6pz 1px rgba(0, 0, 0, 0.45);
         }
 
@@ -82,7 +82,7 @@
         <div id="formAttention"></div>
     </div>
     <div id="contentPage">
-        <h1 class="title">ちゃっとようのさいと</h1>
+        <h1 class="title" onclick="loadChat()">ちゃっとようのさいと</h1>
         <p>ちゃっとぺーじです</p>
         <div id="chat">
 
@@ -155,7 +155,7 @@
             })
         }
         if (ver === "chat") {
-            window.setInterval(loadChat, 70000);
+            window.setInterval(loadChat, 50000);
         }
     </script>
 </body>
