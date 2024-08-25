@@ -63,10 +63,10 @@
     <div id="contentPage">
         <h1 class="title">ちゃっとようのさいと</h1>
         <p>ちゃっとぺーじです</p>
-        <div class="chat">
+        <div id="chat">
 
         </div>
-        <div class="form">
+        <div id="form">
 
         </div>
     </div>
@@ -78,6 +78,8 @@
         const userIdEle = document.getElementById("userId");
         const toIdEle = document.getElementById("toId");
         const formAttentionEle = document.getElementById("formAttention");
+        const chatEle = document.getElementById("chat");
+        const formEle = document.getElementById("form");
         //現在のURLを取得
         const nowUrl = window.location.href;
         // ver を保持する変数
@@ -94,6 +96,7 @@
             if (version === "chat") {
                 indexPageEle.style.display = "none";
                 contentPageEle.style.display = "initial";
+                loadChat();
             }
             if (version === "index") {
                 indexPageEle.style.display = "initial";
@@ -112,9 +115,18 @@
             }
             window.location = `?user=${user}&to=${to}`;
         }
+        function loadChat() {
+            fetch(WEB_APP_URL + `?user=${user}to=${to}`).then(res => {
+                const data = JSON.parse(res);
+                let htmlStr = "";
+                data.forEach((item) => {
+                    htmlStr += `<div class="messa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
+                })
+                chatEle.innerHTML = htmlStr;
+            })
+        }
         if (ver === "chat") {
-            let contentData;
-            fetch(WEB_APP_URL + `?user=${user}to=${to}`).then(res => alert(res));
+            window.setInterval(loadChat, 70000);
         }
     </script>
 </body>
