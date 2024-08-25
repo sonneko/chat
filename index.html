@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>チャット用サイト</title>
     <style>
-        .title{
+        .title {
             font-size: 30px;
             width: 100vw;
             background-color: aqua;
             text-align: center;
             font-family: Arial, Helvetica, sans-serif;
         }
-        .attention{
+
+        .attention {
             color: red;
+            text-align: center;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333333;
+            background-color: #dddddd;
+            font-size: 30px;
+            width: 300px;
+            height: 100px;
+            border-radius: 3px;
+            box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.45);
+        }
+        .btn:hover{
+            box-shadow: inset 2px 2px 6px 1px rgba(0, 0, 0, 0.45);
         }
     </style>
 </head>
+
 <body>
     <div id="indexPage">
         <h1 class="title">ちゃっとようのさいと</h1>
         <p class="attention">知識ある人なら他の人のちゃっと内容が見れるっちゃ見れるのでご注意ください。</p>
         <a href="intro.html">このサイトについて→</a>
-        <p>↓ユーサーIDを入力して、チャット開始！！</p>
+        <p>↓自分のユーサーIDを入力！</p>
         <input type="text" id="userId">
+        <p>↓相手のユーザーIDを入力！</p>
+        <input type="text" id="toId">
+        <div class="btn" onclick="btnClicked()">ちゃっとを開始！！</div>
     </div>
     <div id="contentPage">
         <h1 class="title">ちゃっとようのさいと</h1>
         <p>ちゃっとぺーじです</p>
         <div class="chat">
-            
+
         </div>
-        
+        <div class="form">
+
+        </div>
     </div>
     <script>
         // 要素を取得
         const indexPageEle = document.getElementById("indexPage");
         const contentPageEle = document.getElementById("contentPage");
         const userIdEle = document.getElementById("userId");
+        const toIdEle = document.getElementById("toId");
         //現在のURLを取得
         const nowUrl = window.location.href;
+        // ver を保持する変数
+        let ver;
         // paramsを取得
         const params = nowUrl.split("?")[1].split("&");
         let paramsObj = {}
@@ -47,12 +75,13 @@
             const splitStr = item.split("=");
             paramsObj[splitStr[0]] = splitStr[1];
         })
-        const render = (ver) => {
-            if (ver === "chat") {
+        const render = (version) => {
+            ver = version;
+            if (version === "chat") {
                 indexPageEle.style.display = "none";
                 contentPageEle.style.display = "initial";
             }
-            if (ver === "index") {
+            if (version === "index") {
                 indexPageEle.style.display = "initial";
                 contentPageEle.style.display = "none";
             }
@@ -60,6 +89,14 @@
         if (paramsObj.user === undefined) render("index");
         else if (paramsObj.to === undefined) render("index");
         else render("chat");
+        if (ver === "chat") {
+            
+        } else if (ver === "index") {
+
+        } else {
+            alert("error");
+        }
     </script>
 </body>
+
 </html>
