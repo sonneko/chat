@@ -114,8 +114,7 @@
         }
         if (ver === "chat") {
             let contentData;
-            fetch(WEB_APP_URL + `?user=${user}to=${to}`).then(res => contentData = JSON.parse(res));
-            alert(JSON.stringify(contentData));
+            fetch(WEB_APP_URL + `?user=${user}to=${to}`).then(res => alert(res));
         }
     </script>
 </body>
