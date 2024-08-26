@@ -28,8 +28,8 @@
     const timeEle = document.getElementById("time");
     fetch(WEB_APP_URL + "?method=plate")
         .then(res => res.json)
-        .then(res => JSON.parse(res))
-        .then(res => {
+        .then(json => {
+            const res = JSON.parse(json);
             if (res.status === "ok") {
                 const data = res.content;
                 alert(data)
