@@ -101,12 +101,8 @@
             color: rgba(0, 0, 0, 0.25);
         }
 
-        .oppMessa .time {
+        .time {
             text-align: right;
-        }
-
-        .myMessa .time {
-            text-align: left;
         }
 
         .formBtn {
@@ -221,8 +217,8 @@
                 let htmlStr = "";
                 data.forEach((item) => {
                     const which = item[2] === user;
-                    if (which === true) htmlStr += `<div class="myMessa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
-                    if (which === false) htmlStr += `<div class="oppMessa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
+                    if (which === true) htmlStr += `<div class="myMessa"><div class="content">${item[1]}</div><div class="time">${item[0] + " by " + item[2]}</div></div>`;
+                    if (which === false) htmlStr += `<div class="oppMessa"><div class="content">${item[1]}</div><div class="time">${item[0] + " by " + item[2]}</div></div>`;
                 })
                 chatEle.innerHTML = htmlStr;
             })
