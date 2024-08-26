@@ -80,14 +80,14 @@
         }
         .formBtn{
             text-align: right;
-            padding: 100px;
+            font-size: 30px;
         }
     </style>
 </head>
 
 <body>
     <div id="indexPage">
-        <h1 class="title">ちゃっとようのさいと</h1>
+        <h1 class="title">ちょっとちゃっと</h1>
         <p class="attention">知識ある人なら他の人のちゃっと内容が見れるっちゃ見れるのでご注意ください。</p>
         <a href="intro.html">このサイトについて→</a>
         <p>↓自分のユーサーIDを入力！</p>
@@ -98,7 +98,7 @@
         <div id="formAttention"></div>
     </div>
     <div id="contentPage">
-        <h1 class="title" onclick="loadChat()">ちゃっとようのさいと</h1>
+        <h1 class="title" onclick="loadChat()">ちょっとちゃっと</h1>
         <p>ちゃっとぺーじです</p>
         <div id="chat">
 
@@ -109,7 +109,8 @@
         </div>
     </div>
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqrKcM7nyESKmHp5Hodf99BwyihCogPugbQg8P09xBCAJnMM6c7kcCRhL5Fo3TfOrQ_A/exec"
+        const WEB_APP_UR = "https://script.google.com/macros/s/AKfycbyqrKcM7nyESKmHp5Hodf99BwyihCogPugbQg8P09xBCAJnMM6c7kcCRhL5Fo3TfOrQ_A/exec";
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbywZE29jkt5p-m6KF0DWFlWiu95wuNwNwRGd3phwcaQ/dev";
         // 要素を取得
         const indexPageEle = document.getElementById("indexPage");
         const contentPageEle = document.getElementById("contentPage");
@@ -186,12 +187,9 @@
                     to
                 ]
             };
-            alert(JSON.stringify(formData));
+            console.log(formData);
             fetch(WEB_APP_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                method: "POST", 
                 body: JSON.stringify(formData)
             })
             loadChat();
