@@ -4,38 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ちょっとちゃっと|現存掲示板のリスト</title>
     <style>
-        .fuwafuwa {
-            width: 100vw;
-            height: 200px;
-            position: absolute;
-            top: 40%;
-            margin: 0 auto;
-            animation: fuwafuwa 2s infinite;
-        }
-        @keyframes fuwafuwa {
-            0% {
-                transform: translateY(0px);
-                background-color: rgb(255, 255, 255);
-            }
 
-            30% {
-                transform: translateY(50px);
-                background-color: rgb(0, 0, 0);
-            }
-
-            100% {
-                transform: translateY(0px);
-                background-color: rgb(255, 255, 255);
-            }
-        }
     </style>
 </head>
 
 <body>
-    <h1>作成中ーー！！！</h1>
-    <div class="fuwafuwa"></div>
+    <h1>掲示板のリスト</h1>
+    <div id="time"></div>
+    <div id="plateList"></div>
+    <div class="intro">
+        <h1>掲示板の作り方</h1>
+        <p>当サイト<a href="index.html">ちょっとちゃっと</a>では、掲示板を作成する機能がついています。</p>
+        <p>作り方は、いつものID入力画面で自分のIDと相手のIDに同じものを入れます。</p>
+        <p>同じIDのトークルームは、自動的に掲示板だとみなされ、このリストに自動で追加されます。</p>
+        <p>リストの更新は、毎日夜の12時です。ご了承ください。</p>
+    </div>
 </body>
-
+<script>
+    const listEle = document.getElementById("plateList");
+    const timeEle = document.getElementById("time");
+    fetch(WEB_APP_URL + "?method=plate")
+        .then(res => res.json)
+        .then(res => {
+            if (res.status === "ok") {
+                const data = res.content;
+                let out;
+                data.forEach((item) => {
+                    const value = item[0];
+                    out += `<a href="index.html?user=${value}&to=${value}">${value}</a>`
+                })
+                listEle.innerHTML = out;
+            } else {
+                console.log("error missing data")
+            }
+        });
+</script>
 </html>
