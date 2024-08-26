@@ -166,8 +166,8 @@
                 let htmlStr = "";
                 data.forEach((item) => {
                     const which = item[2] === user;
-                    if (which === true) htmlStr += `<div class="oppMessa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
-                    if (which === false) htmlStr += `<div class="myMessa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
+                    if (which === true) htmlStr += `<div class="myMessa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
+                    if (which === false) htmlStr += `<div class="oppMessa"><div class="content">${item[1]}</div><div class="time">${item[0]}</div></div>`;
                 })
                 chatEle.innerHTML = htmlStr;
             })
