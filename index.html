@@ -78,7 +78,8 @@
         .myMessa .time {
             text-align: left;
         }
-        .formBtn{
+
+        .formBtn {
             text-align: right;
             font-size: 30px;
         }
@@ -154,6 +155,15 @@
             }
             window.location = `?user=${user}&to=${to}`;
         }
+        function formatDateTime(timestamp) {
+            const date = new Date(timestamp);
+            const month = date.getMonth() + 1; // 月は0から始まるので+1
+            const day = date.getDate();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+
+            return `${month}月${day}日${hours}時${minutes}分`;
+        }
         function loadChat() {
             const user = paramsObj.user;
             const to = paramsObj.to;
@@ -180,7 +190,7 @@
             const to = paramsObj.to;
             const formData = {
                 messa: [
-                    Date.now(),
+                    formatDateTime(Date.now()),
                     formTextEle.value,
                     user,
                     to
@@ -188,7 +198,7 @@
             };
             console.log(formData);
             fetch(WEB_APP_URL, {
-                method: "POST", 
+                method: "POST",
                 body: JSON.stringify(formData)
             })
             loadChat();
