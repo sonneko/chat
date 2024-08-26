@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>チャット用サイト</title>
+    <title>ちょっとちゃっと</title>
     <style>
         .title {
             font-size: 30px;
@@ -12,34 +12,31 @@
             background-color: aqua;
             text-align: center;
             font-family: Arial, Helvetica, sans-serif;
-            position: fixed;
-            position: absolute;
-            top: 0;
+            margin-bottom: 30px;
         }
 
         .attention {
             color: red;
             text-align: center;
+            font-size: 20px;
         }
 
         .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: auto;
+            margin-top: 40px;
+            padding: 0 20px;
             color: #333333;
             background-color: #dddddd;
             font-size: 30px;
-            width: 300px;
-            height: 70px;
             border-radius: 3px;
             box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.45);
         }
 
         .btn:hover {
-            box-shadow: inset 2px 2px 6px 1px rgba(0, 0, 0, 0.45);
+            box-shadow: inset 2px 2px 6px 1px rgba(0, 0, 0, 0);
         }
 
-        .indexPage {
+        #indexPage {
             text-align: center;
         }
 
@@ -49,9 +46,35 @@
             box-shadow: inset 2px 2px 6pz 1px rgba(0, 0, 0, 0.45);
         }
 
+        #indexPage input {
+            border-radius: 50px;
+            width: 500px;
+            height: 100px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        #contentPage input {
+            border-radius: 50px;
+            width: 500px;
+            height: 50px;
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+        }
+
+        #indexPage .btn {}
+
+        #indexPage p {
+            margin-top: 60px;
+            font-size: 20px;
+        }
+
         .mess {
             padding: 0;
-            width: 500px;
+            padding: 0;
             margin-top: 100px;
             margin-bottom: 100px;
             border-radius: 50%;
@@ -60,6 +83,13 @@
         .oppMessa .content {
             background-color: #dddddd;
             text-align: left;
+        }
+
+        .content {
+            width: 50%;
+            border-radius: 7px;
+            font-size: 25px;
+            padding: 0 20px;
         }
 
         .myMessa .content {
@@ -82,6 +112,14 @@
         .formBtn {
             text-align: right;
             font-size: 30px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        #chat {
+            margin-bottom: 200px;
         }
     </style>
 </head>
@@ -89,8 +127,9 @@
 <body>
     <div id="indexPage">
         <h1 class="title">ちょっとちゃっと</h1>
-        <p class="attention">知識ある人なら他の人のちゃっと内容が見れるっちゃ見れるのでご注意ください。</p>
+        <div class="attention">自分のIDと相手のIDが流出するとちゃっと内容がばれますご注意ください。</div>
         <a href="intro.html">このサイトについて→</a>
+        <a href="guide.html">使い方→</a>
         <p>↓自分のユーサーIDを入力！</p>
         <input type="text" id="userId">
         <p>↓相手のユーザーIDを入力！</p>
@@ -100,14 +139,9 @@
     </div>
     <div id="contentPage">
         <h1 class="title" onclick="loadChat()">ちょっとちゃっと</h1>
-        <p>ちゃっとぺーじです</p>
-        <div id="chat">
-
-        </div>
-        <div id="form">
-            <input type="text" id="formText">
-            <div class="formBtn" onclick="submit()">📤</div>
-        </div>
+        <div id="chat"></div>
+        <input type="text" id="formText">
+        <div class="formBtn" onclick="submit()">📤</div>
     </div>
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqrKcM7nyESKmHp5Hodf99BwyihCogPugbQg8P09xBCAJnMM6c7kcCRhL5Fo3TfOrQ_A/exec";
@@ -125,26 +159,36 @@
         // ver を保持する変数
         let ver;
         // paramsを取得
-        const params = nowUrl.split("?")[1].split("&");
-        let paramsObj = {}
-        params.forEach((item, index) => {
-            const splitStr = item.split("=");
-            paramsObj[splitStr[0]] = splitStr[1];
-        })
+        let paramsObj;
+        try {
+            const params = nowUrl.split("?")[1].split("&");
+            paramsObj = {}
+            params.forEach((item, index) => {
+                const splitStr = item.split("=");
+                paramsObj[splitStr[0]] = splitStr[1];
+            })
+        } catch {
+            paramsObj = {
+                user: null,
+                to: null
+            }
+        }
+
         const render = (version) => {
             ver = version;
+            console.log("render()" + ver);
             if (version === "chat") {
                 indexPageEle.style.display = "none";
                 contentPageEle.style.display = "initial";
                 loadChat();
             }
             if (version === "index") {
-                indexPageEle.style.display = "initial";
+                indexPageEle.style.display = "inlinebox";
                 contentPageEle.style.display = "none";
             }
         }
-        if (paramsObj.user === undefined) render("index");
-        else if (paramsObj.to === undefined) render("index");
+        if (paramsObj.user === null) render("index");
+        else if (paramsObj.to === null) render("index");
         else render("chat");
         function btnClicked() {
             user = userIdEle.value;
@@ -165,6 +209,7 @@
             return `${month}月${day}日${hours}時${minutes}分`;
         }
         function loadChat() {
+            console.log("load")
             const user = paramsObj.user;
             const to = paramsObj.to;
             fetch(WEB_APP_URL + `?user=${user}&to=${to}`).then(res => res.json()).then(res => {
@@ -188,6 +233,10 @@
         function submit() {
             const user = paramsObj.user;
             const to = paramsObj.to;
+            if (formTextEle.value === "") {
+                alert("なにもかいてないよ");
+                return;
+            }
             const formData = {
                 messa: [
                     formatDateTime(Date.now()),
@@ -201,6 +250,7 @@
                 method: "POST",
                 body: JSON.stringify(formData)
             })
+            formTextEle.value = "";
             loadChat();
         }
     </script>
