@@ -11,11 +11,12 @@
 </head>
 
 <body>
-    <h1>掲示板のリスト</h1>
+    <h1>ちょっとちゃっと</h1>
+    <h2>掲示板のリスト</h2>
     <div id="time"></div>
     <div id="plateList"></div>
     <div class="intro">
-        <h1>掲示板の作り方</h1>
+        <h2>掲示板の作り方</h2>
         <p>当サイト<a href="index.html">ちょっとちゃっと</a>では、掲示板を作成する機能がついています。</p>
         <p>作り方は、いつものID入力画面で自分のIDと相手のIDに同じものを入れます。</p>
         <p>同じIDのトークルームは、自動的に掲示板だとみなされ、このリストに自動で追加されます。</p>
@@ -26,22 +27,21 @@
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyqrKcM7nyESKmHp5Hodf99BwyihCogPugbQg8P09xBCAJnMM6c7kcCRhL5Fo3TfOrQ_A/exec";
     const listEle = document.getElementById("plateList");
     const timeEle = document.getElementById("time");
-    fetch(WEB_APP_URL + "?method=plate")
-        .then(res => res.json)
-        .then(json => {
-            const res = JSON.parse(json);
-            if (res.status === "ok") {
-                const data = res.content;
-                alert(data)
-                let out;
-                data.forEach((item) => {
+    fetch(WEB_APP_URL + `?method=plate`).then(res => res.json()).then(res => {
+        if (res.status === "ok") {
+            const data = res.content;
+            let out = "";
+            data.forEach((item, index) => {
+                if (index !== 0) {
                     const value = item[0];
-                    out += `<a href="index.html?user=${value}&to=${value}">${value}</a>`
-                })
-                listEle.innerHTML = out;
-            } else {
-                alert("error missing data")
-            }
-        });
+                    out += `<a href="index.html?user=${value}&to=${value}">${value}</a><br>`
+                }
+            })
+            listEle.innerHTML = out;
+        } else {
+            alert("error missing data")
+        }
+    });
 </script>
+
 </html>
