@@ -24,7 +24,7 @@
             data.forEach((item, index) => {
               if (index !== 0) {
                 const value = item[0];
-                out += `<div class="btn" onclick="btnClicked("${value}"")">${value}</div><br>`;
+                out += `<div class="btn" onclick="btnClicked("${value}")">${value}</div><br>`;
               }
             });
             userListEle.innerHTML = out;
