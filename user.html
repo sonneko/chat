@@ -15,7 +15,7 @@
       const userListEle = document.getElementById("user-list");
       const WEB_APP_URL =
         "https://script.google.com/macros/s/AKfycbyqrKcM7nyESKmHp5Hodf99BwyihCogPugbQg8P09xBCAJnMM6c7kcCRhL5Fo3TfOrQ_A/exec";
-      fetch(WEB_APP_URL + "/?method=user")
+      fetch(WEB_APP_URL + "?method=user")
         .then((res) => res.json())
         .then((res) => {
           if (res.status === "ok") {
