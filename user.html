@@ -24,10 +24,10 @@
             data.forEach((item, index) => {
               if (index !== 0) {
                 const value = item[0];
-                out += `<div class="btn" onclick="btnClicked(${value})">${value}</a><br>`;
+                out += `<div class="btn" onclick="btnClicked(${value})">${value}</div><br>`;
               }
             });
-            listEle.innerHTML = out;
+            userListEle.innerHTML = out;
           } else {
             alert("error missing data");
           }
