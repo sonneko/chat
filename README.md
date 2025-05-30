@@ -19,7 +19,7 @@ Firestore DatabaseとNext.jsによるバックエンドアプリを用いた、�
 
 ↓↓
 フロントエンド：
-https://github.com/sonneko/sonneko-chat
+https://github.com/sonneko/chat-app
 
 バックエンド：
 https://github.com/sonneko/sonneko-back
